@@ -1,0 +1,51 @@
+AUTOR:
+Fernando Gouveia Lima	   NUSP:13672710     EMAIL: fernandolimabusiness@gmail.com
+
+DESCRIÇÃO:
+O programa consiste na resolução dos problemas propostos pelo Ep3 da disciplina MAC0216, do curso bacharelado de ciência da
+computação do IME USP-(Instituto de Matemática e Estatística da Universidade de São Paulo), ministrada pelo Daniel Macedo
+Batista.
+O programa consiste de uma biblioteca estática (sua interface (.h) e sua implementação (.c)), uma biblioteca dinâmica (sua
+interface (.h) e sua implementação (.c), um arquivo .c que realiza testes das bibliotecas e um bash script que compila este
+aquivo teste junto com as bibliotecas. Dentro da biblioteca estática estão presentes 6 funções que resolvem problemas 
+matemáticos. A primeira chama-se ehPar e ela verifica se um número é par. A segunda, ehPrimo, verifica se o número passado
+para ela é primo, ou seja, não possui divisor sem ser ele e 1. A terceira, ehQuadradoPerfeito, verifica se o número possui
+uma raiz quadrada perfeita, ou seja, se um número inteiro ao quadrado resulta nele. A quarta chama-se ehCuboPerfeito e 
+verifica se o número possui uma raiz ao cubo perfeita. A quinta, ehFibonacci, verifica se o número passado pertence a famosa
+sequência de Fibonacci. E a última delas chama-se ehFatorial e verifica se existe algum fatorial que resulte em um valor 
+igual ao número passado. A bibioteca dinâmica só possui uma função, a qual aloca espaço dinâmicamente para um vetor e preenche
+este com números pseudo-aleatórios. 
+
+COMO EXECUTAR:
+Para executar o programa basta abrir seu terminal, digitar o comando "cd /DiretórioExemplo" que te leve para o diretório
+onde se encontra os arquivos das bibliotecas, o bash e o arquivo em c. Após isto, é necessário compilar o programa, para 
+isso basta simplesmente executar "./compila.sh" que irá compilar as bibliotecas, o programa testa.c e executá-lo, irá também
+gerar um arquivo doxyfile que é responsável pela documentação das bibliotecas. Caso queira rodar o testa.c novamente sem 
+compilar, basta executar o comando "./testa". No entanto, antes de executar este ./testa é de extrema importancia executar
+o comando "export LD_LIBRARY_PATH=${PWD}:${LD_LIBRARY_PATH}" para que possa ligar a biblioteca dinâmica. Uma breve explicação
+com relação o arquivo bash e sua compilação: As duas primeiras linhas correspondem a compilação e criação da biblioteca
+dinâmica, utiliza-se -shared para o gcc gerar o arquivo .so (que corresponde a biblioteca dinâmica). As duas próximas 
+linhas correspondem a criação e compilação da biblioteca estatica, gerando primeiramente o arquivo .o e depois o arquivo .a
+. A linha 10 e 11 correspondem a indicar o caminho da biblioteca dinâmica e a ligação de ambas bibliotecas e gerar o arquivo]
+executável. Por fim, executa o arquivo testa e gera o arquivo de documentação (doxyfile).
+
+TESTES:
+O arquivo testa.c, primeiramente irá gerar um vetor do tipo long long, com tamanho de 25 espaços que serão preenchidos por
+números pseudo-aleatorios gerados pela semente valor 15 (está é útil para o funcionamento da função srand que é a responsável
+pela geração dos números pseudo-aleatórios), cada um desses 25 números entrarão em um laço for que irá testa-los verificando
+as 6 funções da biblioteca estática, cada uma destas funções terão seu tempo de execução cronometrado.
+
+
+DEPENDÊNCIAS:
+Para compilar este programa em C é necessário o compilador gcc versão 9.4.0 e também é importante um linker GNU ld na versão 2.34
+Este programa foi executado no sistema operacional Windows 10 64 bits, porém os comandos foram executados no WSL - ( Subsistema
+Windows para Linux), este oferece um ambiente linux compatível ao sistema da microsoft de froma que possa ser executados
+programas nativos do sistema GNU/LINUX. A versão baixada é o Ubuntu 20.045LTS
+
+IMPORTANTE:
+Ao preencher o vetor, na biblioteca dinâmica, foi optado pela utilização da soma de dois rand(), ao invés de utilizar a 
+multiplicação de dois rand(). Isso ocorreu devido ao RAND_MAX no meu computador possuir um valor igual a 2147483647, a 
+multiplicação de dois números deste tamanho estava levando ao estouro da capicade que um tipo long long consegue aguentar.
+Entendo que a maioria dos computadores possuem um RAND_MAX igual a 32767, no entanto para não ocorrer o risco de overflow
+foi optado pela adição de dois rand(). Mais sobre o assunto pode ser lido em 
+https://www.gnu.org/software/libc/manual/html_node/ISO-Random.html
